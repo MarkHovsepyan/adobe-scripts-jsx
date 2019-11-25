@@ -55,14 +55,20 @@ function importFiles(){
 }
 
 function shiftLayers(){
-  app.beginUndoGroup("Shifting layers to their correct positions");
+  app.beginUndoGroup("Shift layers to their correct positions");
 
   layerCoords = readData().layerCoords;
 
   for (var i = 1; i < currentComp.layers.length + 1; i++) {
     var tempNameArr = currentComp.layer(i).name.split("_");
-    tempNameArr = tempNameArr.slice(2, tempNameArr.length + 1).join("").split(".png");
-    currentComp.layer(i).name = tempNameArr[0];
+
+    if (tempNameArr[1].length === 5 && tempNameArr[1].charAt(4) === "s") {
+        tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
+        currentComp.layer(i).name = tempNameArr[0];
+    } else {
+      tempNameArr = tempNameArr.slice(2, tempNameArr.length + 1).join("_").split(".png");
+      currentComp.layer(i).name = tempNameArr[0];
+    }
   }
 
   for (var i = 1; i <= currentComp.layers.length; i++) {
@@ -70,6 +76,7 @@ function shiftLayers(){
       if (currentComp.layer(i).name === layerCoords[j].split(",")[0]) {
         var newPosition = layerCoords[j].split(",").slice(1, 3);
         currentComp.layer(i).property("Position").setValue(newPosition);
+        // alert(layerCoords[j].split(",")[0]);
       }
     }
   }
