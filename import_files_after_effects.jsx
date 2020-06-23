@@ -24,6 +24,7 @@ function readData() {
     currentLine = file.readln();
     txtArray.push(currentLine);
   }
+  
   file.close();
   
   var txtObj = {
@@ -63,20 +64,25 @@ function shiftLayers(){
     var tempNameArr = currentComp.layer(i).name.split("_");
 
     if (tempNameArr[1].length === 5 && tempNameArr[1].charAt(4) === "s") {
-        tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
-        currentComp.layer(i).name = tempNameArr[0];
-    } else {
-      tempNameArr = tempNameArr.slice(2, tempNameArr.length + 1).join("_").split(".png");
+      tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
       currentComp.layer(i).name = tempNameArr[0];
+      // alert(currentComp.layer(i).name);
+    } else {
+      tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
+      currentComp.layer(i).name = tempNameArr[0];
+      // alert(currentComp.layer(i).name);
+
     }
   }
 
   for (var i = 1; i <= currentComp.layers.length; i++) {
     for (var j = 0; j < layerCoords.length; j++) {
+
       if (currentComp.layer(i).name === layerCoords[j].split(",")[0]) {
         var newPosition = layerCoords[j].split(",").slice(1, 3);
         currentComp.layer(i).property("Position").setValue(newPosition);
-        // alert(layerCoords[j].split(",")[0]);
+        // alert(layerCoords[j].split(",")[0] + ' vs ' + currentComp.layer(i).name);
+
       }
     }
   }
