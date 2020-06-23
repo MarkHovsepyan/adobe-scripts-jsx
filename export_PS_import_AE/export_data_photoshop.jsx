@@ -74,6 +74,7 @@ function writeFile(info) {
     var f = new File(FPath + "/" + docName + ".txt");
     f.remove();
     f.open('a');
+    f.encoding = "UTF8";
     f.lineFeed = fileLineFeed;
     f.write(info);
     f.close();
