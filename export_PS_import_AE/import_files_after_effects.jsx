@@ -64,11 +64,11 @@ function shiftLayers(){
     var tempNameArr = currentComp.layer(i).name.split("_");
 
     if (tempNameArr[1].length === 5 && tempNameArr[1].charAt(4) === "s") {
-      tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
+      tempNameArr = tempNameArr.slice(tempNameArr.length - 1, tempNameArr.length + 1).join("_").split(".png");
       currentComp.layer(i).name = tempNameArr[0];
       // alert(currentComp.layer(i).name);
     } else {
-      tempNameArr = tempNameArr.slice(3, tempNameArr.length + 1).join("_").split(".png");
+      tempNameArr = tempNameArr.slice(tempNameArr.length - 1, tempNameArr.length + 1).join("_").split(".png");
       currentComp.layer(i).name = tempNameArr[0];
       // alert(currentComp.layer(i).name);
 
